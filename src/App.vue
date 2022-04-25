@@ -8,6 +8,8 @@
 import NotFound from './components/NotFound.vue'
 import Home from './components/Home.vue'
 import Login from './components/Login.vue'
+import Register from './components/Register.vue'
+
 const routes = {
   '/': Home,
   '/login': Login
