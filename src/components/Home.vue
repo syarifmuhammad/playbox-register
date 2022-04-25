@@ -9,24 +9,26 @@
             </header>
             <main class="container mt-4" id="main-content" style="height:100%;">
                 <div class="row">
-                    <div class="col-4 d-flex flex-column">
+                    <a href="#biodata" class="col-4 d-flex flex-column" style="cursor:pointer;">
                         <span class="mb-2 text-primary">1. Biodata</span>
-                        <span class="w-100" style="border-bottom: 6px solid #1F89C5;"></span>
-                    </div>
-                    <div class="col-4 d-flex flex-column">
+                        <span class="w-100" :style="currentView=='biodata' || currentView=='pembayaran' || currentView=='ide' ? 'border-bottom: 6px solid #1F89C5;' : ''"></span>
+                    </a>
+                    <a a href="#pembayaran" class="col-4 d-flex flex-column" style="cursor:pointer;">
                         <span class="mb-2 text-primary">2. Pembayaran</span>
-                        <span class="w-100" style="border-bottom: 6px solid #1F89C5;"></span>
-                    </div>
-                    <div class="col-4 d-flex flex-column">
+                        <span class="w-100" :style="currentView=='pembayaran' || currentView=='ide' ? 'border-bottom: 6px solid #1F89C5;' : ''"></span>
+                    </a>
+                    <a a href="#ide" class="col-4 d-flex flex-column" style="cursor:pointer;">
                         <span class="mb-2 text-secondary">3. IDE</span>
-                        <span class="w-100" style="border-bottom: 6px solid #6c757d;"></span>
-                    </div>
+                        <span class="w-100" :style="currentView=='ide' ? 'border-bottom: 6px solid #1F89C5;' : ''"></span>
+                    </a>
                 </div>
-                <component :is="component"></component>
+                <component :is="currentView"></component>
             </main>
         </div>
     </div>
 </template>
+
+
 
 <script>
 import Biodata from './Biodata.vue'
@@ -40,8 +42,18 @@ export default {
     },
     data(){
         return {
-            component:"Biodata"
+            currentPath: window.location.hash
         }
+    },
+    computed:{
+        currentView() {
+            return this.currentPath != '' ? this.currentPath.slice(1) : "biodata" 
+        }
+    },
+    mounted() {
+        window.addEventListener('hashchange', () => {
+            this.currentPath = window.location.hash
+        })
     }
 }
 </script>

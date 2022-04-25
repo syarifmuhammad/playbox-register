@@ -12,7 +12,10 @@ import Register from './components/Register.vue'
 
 const routes = {
   '/': Home,
-  '/login': Login
+  'biodata': Home,
+  'pembayaran': Home,
+  'ide': Home,
+  'login': Login
 }
 
 export default {

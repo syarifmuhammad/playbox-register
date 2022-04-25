@@ -1,10 +1,10 @@
 <template>
     <div class="card mt-3">
         <div class="card-body">
-            <h1 class="text-center fs-3 mb-3">KATEGORI</h1>
+            <h4 class="text-center fs-4 mb-3 fw-bold">KATEGORI</h4>
             <div class="d-flex justify-content-center row">
-                <div class="col-sm-5 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top" :class="selectedCategory == 'sma' ? 'text-white bg-primary' : 'border'" style="cursor:pointer; min-height:80px;">SMA/SMK</div>
-                <div class="col-sm-5 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top" :class="selectedCategory == 'mahasiswa' ? 'text-white bg-primary' : 'border'" style="cursor:pointer; min-height:80px;">Mahasiswa</div>
+                <div class="col-sm-5 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top" @click="selectedCategory='sma'" :class="selectedCategory == 'sma' ? 'text-white bg-primary' : 'border'" style="cursor:pointer; min-height:80px;">SMA/SMK</div>
+                <div class="col-sm-5 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top" @click="selectedCategory='mahasiswa'" :class="selectedCategory == 'mahasiswa' ? 'text-white bg-primary' : 'border'" style="cursor:pointer; min-height:80px;">Mahasiswa</div>
             </div>
             <div class="row pb-3">
                 <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
@@ -30,9 +30,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="kartu_identitas">{{kartu_identitas}}</label>
-                                <input type="file" name="kartu_identitas" class="form-control mb-2">
+                                <input type="file" name="kartu_identitas" class="form-control mb-3">
                             </div>
-                            <button class="btn btn-outline-primary w-100">SIMPAN</button>
                         </form>
                     </div>
                 </div>
@@ -59,10 +58,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="kartu_identitas">{{kartu_identitas}}</label>
-                                <input type="file" name="kartu_identitas" class="form-control mb-2">
+                                <input type="file" name="kartu_identitas" class="form-control mb-3">
                             </div>
                             <!-- <input type="file" name="kartu_identitas" class="form-control"> -->
-                            <button class="btn btn-outline-primary w-100">SIMPAN</button>
                         </form>
                     </div>
                 </div>
@@ -88,12 +86,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="kartu_identitas">{{kartu_identitas}}</label>
-                                <input type="file" name="kartu_identitas" class="form-control mb-2">
+                                <input type="file" name="kartu_identitas" class="form-control mb-3">
                             </div>
-                            <button class="btn btn-outline-primary w-100">SIMPAN</button>
                         </form>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="w-25 btn btn-primary fw-bold disabled">SIMPAN & LANJUT</button>
             </div>
         </div>
     </div>

@@ -2,10 +2,10 @@
     <div class="card mt-3">
         <div class="card-body">
             <form action="" class="form">
-                <div class="d-flex justify-content-center">
+                <!-- <div class="d-flex justify-content-center">
                     <div class="col-4 d-flex justify-content-center align-items-center text-white bg-primary mx-2 fs-4 rounded-top" style="min-height:80px;">SMA/SMK</div>
                     <div class="col-4 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top" style="min-height:80px;">Mahasiswa</div>
-                </div>
+                </div> -->
                 <div class="card border-0">
                     <div class="card-body bg-primary rounded text-white p-5" style="min-height: 400px;">
                         <div class="row p-5">
@@ -35,6 +35,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="d-flex justify-content-between mb-3" style="padding-left:1rem; padding-right:1rem;">
+            <button class="w-25 btn btn-outline-primary fw-bold">KEMBALI</button>
+            <button class="w-25 btn btn-primary fw-bold disabled">LANJUT</button>
         </div>
     </div>
 </template>

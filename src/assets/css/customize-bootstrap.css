@@ -9,6 +9,12 @@
     transition: .4s;
 }
 
+.btn-primary {
+    color: #FFFFFF !important;
+    border: 0 !important;
+    background: linear-gradient(49deg, rgba(81,172,223,1) 50%, rgba(31,137,197,1) 100%) !important;
+}
+
 .btn-outline-primary:hover {
     color: #FFFFFF !important;
     border: 0 !important;
