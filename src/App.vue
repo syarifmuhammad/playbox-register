@@ -7,6 +7,8 @@
 <script>
 import NotFound from './components/NotFound.vue'
 import Login from './components/Login.vue'
+import Register from './components/Register.vue'
+
 const routes = {
   '/login': Login
 }
