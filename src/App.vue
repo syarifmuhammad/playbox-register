@@ -6,11 +6,16 @@
 
 <script>
 import NotFound from './components/NotFound.vue'
+import Home from './components/Home.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 
 const routes = {
-  '/login': Login
+  '/': Home,
+  'biodata': Home,
+  'pembayaran': Home,
+  'ide': Home,
+  'login': Login
 }
 
 export default {

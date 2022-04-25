@@ -2,7 +2,7 @@
   <main class="container" id="main-content" style="height: 100%">
     <div
       style="height: 100%"
-      class="row d-flex justify-content-center align-items-center"
+      class="row d-flex justify-content-center align-items-center p-3"
     >
       <div
         id="login"
@@ -27,7 +27,10 @@
             required
           />
           <button class="btn btn-outline-primary my-3">Login</button>
-          <span>Belum punya akun? <a>Daftar</a></span>
+          <span
+            >Belum punya akun?
+            <a style="text-decoration: dashed" href="#register">Daftar</a></span
+          >
         </form>
       </div>
     </div>
