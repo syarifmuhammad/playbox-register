@@ -2,14 +2,14 @@
   <main class="container" id="main-content" style="height: 100%">
     <div
       style="height: 100%"
-      class="row d-flex justify-content-center align-items-center"
+      class="row d-flex justify-content-center align-items-center p-3"
     >
       <div
         id="register"
         class="col-xs-11 col-sm-10 col-md-6 col-xl-4 d-flex flex-column align-items-center justify-content-center py-3 px-4"
       >
         <img
-          src="assets/logo-playbox-s2-fix.png"
+          src="images/logo-playbox-s2-fix.png"
           class="img-fluid w-50"
           alt=""
         />
@@ -33,6 +33,10 @@
             required
           />
           <button class="btn btn-outline-primary my-3">Daftar</button>
+          <span
+            >Sudah punya akun?
+            <a style="text-decoration: dashed" href="#login">Login</a></span
+          >
         </form>
       </div>
     </div>
