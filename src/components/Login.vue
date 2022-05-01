@@ -26,7 +26,7 @@
             placeholder="Password"
             required
           />
-          <button class="btn btn-outline-primary my-3">Login</button>
+          <button class="btn btn-outline-primary my-3" @click="login">Login</button>
           <span
             >Belum punya akun?
             <a style="text-decoration: dashed" href="#register">Daftar</a></span
@@ -36,5 +36,33 @@
     </div>
   </main>
 </template>
+
+<script>
+import { mapState } from 'pinia'
+import {useLoginStore} from "../stores/login"
+export default {
+  name: "Login",
+  data(){
+    return {
+      username:"",
+      password:""
+    }
+  },
+  computed:{
+    ...mapState(useLoginStore, ['isLogin'])
+  },
+  created(){
+    if(this.isLogin) {
+      //redirect ke halaman home
+    }
+  },
+  methods:{
+    login(){
+      // localStorage.setItem("PLAYBOX_TOKEN", "")
+      // useLoginStore.login()
+    }
+  }
+}
+</script>
 
 <style scoped></style>
