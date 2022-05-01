@@ -13,24 +13,25 @@ import { mapState } from 'pinia'
 import {useLoginStore} from "./stores/login"
 
 const routes = {
-  '/': Home,
-  'biodata': Home,
-  'pembayaran': Home,
-  'ide': Home,
-  'login': Login
-}
+  "/": Home,
+  biodata: Home,
+  pembayaran: Home,
+  ide: Home,
+  login: Login,
+  register: Register,
+};
 
 export default {
   data() {
     return {
-      currentPath: window.location.hash
-    }
+      currentPath: window.location.hash,
+    };
   },
   computed: {
     ...mapState(useLoginStore, ['isLogin']),
     currentView() {
-      return routes[this.currentPath.slice(1) || '/'] || NotFound
-    }
+      return routes[this.currentPath.slice(1) || "/"] || NotFound;
+    },
   },
   created() {
     // if(!cekToken){
@@ -42,15 +43,14 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('hashchange', () => {
-		  this.currentPath = window.location.hash
-		})
-  }
-}
+    window.addEventListener("hashchange", () => {
+      this.currentPath = window.location.hash;
+    });
+  },
+};
 </script>
 
 <style>
 @import "./assets/css/customize-bootstrap.css";
 @import "./assets/css/style.css";
-
 </style>
