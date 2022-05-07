@@ -13,20 +13,22 @@
           class="img-fluid w-50"
           alt=""
         />
-        <form class="form d-flex flex-column w-100">
+        <form class="form d-flex flex-column w-100" @submit.prevent="login">
           <input
             class="form-control my-3"
             type="email"
             placeholder="Email"
             required
+            v-model="email"
           />
           <input
             class="form-control"
             type="password"
             placeholder="Password"
             required
+            v-model="password"
           />
-          <button class="btn btn-outline-primary my-3" @click="login">Login</button>
+          <button class="btn btn-outline-primary my-3" type="submit">Login</button>
           <span
             >Belum punya akun?
             <a style="text-decoration: dashed" href="#register">Daftar</a></span
@@ -40,11 +42,12 @@
 <script>
 import { mapState } from 'pinia'
 import {useLoginStore} from "../stores/login"
+import http from "../http-common"
 export default {
   name: "Login",
   data(){
     return {
-      username:"",
+      email:"",
       password:""
     }
   },
@@ -53,13 +56,36 @@ export default {
   },
   created(){
     if(this.isLogin) {
-      //redirect ke halaman home
+      window.location.href = "/"
     }
   },
   methods:{
     login(){
-      // localStorage.setItem("PLAYBOX_TOKEN", "")
-      // useLoginStore.login()
+      http.post('/signin', {
+        email: this.email,
+        password: this.password
+      }).then(response => {
+        let data = response.data
+        if(!data.error){
+          localStorage.setItem("PLAYBOX_TOKEN", data.data.token)
+          useLoginStore.login()
+          window.location.href="#"
+        }else{
+          this.$swal.fire({
+            icon: "error",
+            title: "Gagal",
+            text: 'Kombinasi email dan password tidak valid !',
+          })
+        }
+      }).catch(e => {
+        if(e.response.data.error){
+          this.$swal.fire({
+            icon: "error",
+            title: "Gagal",
+            text: 'Kombinasi email dan password tidak valid !',
+          })
+        }
+      })
     }
   }
 }
