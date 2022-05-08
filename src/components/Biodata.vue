@@ -4,7 +4,7 @@
       <h4 class="text-center fs-4 mb-3 fw-bold">KATEGORI</h4>
       <div class="d-flex justify-content-center row">
         <div
-          class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top"
+          class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top text-center"
           @click="teamStore.selectedCategory = 'SMA'"
           :class="teamStore.selectedCategory == 'SMA' ? 'text-white bg-primary' : 'border'"
           style="cursor: pointer; min-height: 80px"
@@ -12,7 +12,7 @@
           SMA/SMK
         </div>
         <div
-          class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top"
+          class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top text-center"
           @click="teamStore.selectedCategory = 'MHS'"
           :class="teamStore.selectedCategory == 'MHS' ? 'text-white bg-primary' : 'border'"
           style="cursor: pointer; min-height: 80px"
@@ -20,12 +20,12 @@
           Mahasiswa
         </div>
         <div
-          class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top"
+          class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top text-center"
           @click="teamStore.selectedCategory = 'INT'"
           :class="teamStore.selectedCategory == 'INT' ? 'text-white bg-primary' : 'border'"
           style="cursor: pointer; min-height: 80px"
         >
-          Internal
+          ITTelkom Surabaya
         </div>
       </div>
       <hr>
@@ -38,6 +38,7 @@
                 <label for="nama">Nama</label>
                 <input
                   type="text"
+                  ref="memberOneName"
                   name="memberOneName"
                   class="form-control mb-2"
                   :value="teamStore.member_one.name"
@@ -47,6 +48,7 @@
                 <label for="no_telp">No Telepon</label>
                 <input
                   type="tel"
+                  ref="memberOnePhone"
                   name="memberOnePhone"
                   class="form-control mb-2"
                   :value="teamStore.member_one.phone"
@@ -56,6 +58,7 @@
                 <label for="email">Email</label>
                 <input
                   type="email"
+                  ref="memberOneEmail"
                   name="memberOneEmail"
                   class="form-control mb-2"
                   :value="teamStore.member_one.email"
@@ -65,15 +68,18 @@
                 <label for="institusi">Asal Institusi</label>
                 <input
                   type="text"
+                  ref="memberOneInstitution"
                   name="memberOneInstitution"
                   class="form-control mb-2"
-                  :value="teamStore.member_one.institution"
+                  :readonly="teamStore.selectedCategory=='INT'"
+                  :value="teamStore.selectedCategory=='INT' ? 'ITTelkom Surabaya' : teamStore.member_one.institution"
                 />
               </div>
               <div class="form-group">
                 <label for="kartu_identitas">{{ kartu_identitas }}</label>
                 <input
                   type="file"
+                  accept="image/png, image/jpeg"
                   ref="memberOneIdImage"
                   class="form-control mb-3 d-none"
                   @change="setMemberOneIdImage"
@@ -83,6 +89,10 @@
                   <span class="form-control text-truncate" :class="teamStore.member_one.id_image.trim() != '' ? 'bg-success text-white' : ''" aria-describedby="basic-addon1">
                     {{teamStore.member_one.id_image.trim() != "" ? teamStore.member_one.id_image : "No file chosen"}}
                   </span>
+                  <div class="w-100 px-1">
+                    <small>Accepted File : JPG, JPEG, PNG</small> <br>
+                    <small>Max : 2 Mb</small>
+                  </div>
                 </div>
               </div>
           </div>
@@ -95,6 +105,7 @@
                 <label for="nama">Nama</label>
                 <input
                   type="text"
+                  ref="memberTwoName"
                   name="memberTwoName"
                   class="form-control mb-2"
                   :value="teamStore.member_two.name"
@@ -104,6 +115,7 @@
                 <label for="no_telp">No Telepon</label>
                 <input
                   type="tel"
+                  ref="memberTwoPhone"
                   name="memberTwoPhone"
                   class="form-control mb-2"
                   :value="teamStore.member_two.phone"
@@ -113,6 +125,7 @@
                 <label for="email">Email</label>
                 <input
                   type="email"
+                  ref="memberTwoEmail"
                   name="memberTwoEmail"
                   class="form-control mb-2"
                   :value="teamStore.member_two.email"
@@ -122,15 +135,18 @@
                 <label for="institusi">Asal Institusi</label>
                 <input
                   type="text"
+                  ref="memberTwoInstitution"
                   name="memberTwoInstitution"
                   class="form-control mb-2"
-                  :value="teamStore.member_two.institution"
+                  :readonly="teamStore.selectedCategory=='INT'"
+                  :value="teamStore.selectedCategory=='INT' ? 'ITTelkom Surabaya' : teamStore.member_two.institution"
                 />
               </div>
               <div class="form-group">
                 <label for="kartu_identitas">{{ kartu_identitas }}</label>
                 <input
                   type="file"
+                  accept="image/png, image/jpeg"
                   ref="memberTwoIdImage"
                   class="form-control mb-3 d-none"
                   @change="setMemberTwoIdImage"
@@ -140,6 +156,10 @@
                   <span class="form-control text-truncate" :class="teamStore.member_two.id_image.trim() != '' ? 'bg-success text-white' : ''" aria-describedby="basic-addon1">
                     {{teamStore.member_two.id_image.trim() != "" ? teamStore.member_two.id_image : "No file chosen"}}
                   </span>
+                  <div class="w-100 px-1">
+                    <small>Accepted File : JPG, JPEG, PNG</small> <br>
+                    <small>Max : 2 Mb</small>
+                  </div> 
                 </div>
               </div>
               <!-- <input type="file" name="kartu_identitas" class="form-control"> -->
@@ -153,6 +173,7 @@
                 <label for="nama">Nama</label>
                 <input
                   type="text"
+                  ref="memberThreeName"
                   name="memberThreeName"
                   class="form-control mb-2"
                   :value="teamStore.member_three.name"
@@ -162,6 +183,7 @@
                 <label for="no_telp">No Telepon</label>
                 <input
                   type="tel"
+                  ref="memberThreePhone"
                   name="memberThreePhone"
                   class="form-control mb-2"
                   :value="teamStore.member_three.phone"
@@ -171,6 +193,7 @@
                 <label for="email">Email</label>
                 <input
                   type="email"
+                  ref="memberThreeEmail"
                   name="memberThreeEmail"
                   class="form-control mb-2"
                   :value="teamStore.member_three.email"
@@ -180,15 +203,18 @@
                 <label for="institusi">Asal Institusi</label>
                 <input
                   type="text"
+                  ref="memberThreeInstitution"
                   name="memberThreeInstitution"
                   class="form-control mb-2"
-                  :value="teamStore.member_three.institution"
+                  :readonly="teamStore.selectedCategory=='INT'"
+                  :value="teamStore.selectedCategory=='INT' ? 'ITTelkom Surabaya' : teamStore.member_three.institution"
                 />
               </div>
               <div class="form-group">
                 <label for="kartu_identitas">{{ kartu_identitas }}</label>
                 <input
                   type="file"
+                  accept="image/png, image/jpeg"
                   ref="memberThreeIdImage"
                   class="form-control mb-3 d-none"
                   @change="setMemberThreeIdImage"
@@ -198,6 +224,10 @@
                   <span class="form-control text-truncate" :class="teamStore.member_three.id_image.trim() != '' ? 'bg-success text-white' : ''" aria-describedby="basic-addon1">
                     {{teamStore.member_three.id_image.trim() != "" ? teamStore.member_three.id_image : "No file chosen"}}
                   </span>
+                  <div class="w-100 px-1">
+                    <small>Accepted File : JPG, JPEG, PNG</small> <br>
+                    <small>Max : 2 Mb</small>
+                  </div>
                 </div>
               </div>
           </div>
@@ -226,7 +256,6 @@ export default {
   },
   computed: {
     ...mapStores(useTeamStore),
-    // ...mapWritableState(useTeamStore, ['teamStore.selectedCategory']),
     kartu_identitas() {
       return this.teamStore.selectedCategory == "MHS" || this.teamStore.selectedCategory == "INT"  ? "KTM" : "KARTU PELAJAR";
     }
@@ -234,6 +263,10 @@ export default {
   methods: {
     setMemberOneIdImage(){
       if(this.$refs.memberOneIdImage.files.length > 0) {
+        this.teamStore.member_one.name = this.$refs.memberOneName.value
+        this.teamStore.member_one.phone = this.$refs.memberOnePhone.value
+        this.teamStore.member_one.email = this.$refs.memberOneEmail.value
+        this.teamStore.member_one.institution = this.$refs.memberOneInstitution.value
         this.teamStore.member_one.id_image = this.$refs.memberOneIdImage.files[0].name
       } else {
         this.teamStore.member_one.id_image = ""
@@ -241,6 +274,10 @@ export default {
     },
     setMemberTwoIdImage(){
       if(this.$refs.memberTwoIdImage.files.length > 0) {
+        this.teamStore.member_two.name = this.$refs.memberTwoName.value
+        this.teamStore.member_two.phone = this.$refs.memberTwoPhone.value
+        this.teamStore.member_two.email = this.$refs.memberTwoEmail.value
+        this.teamStore.member_two.institution = this.$refs.memberTwoInstitution.value
         this.teamStore.member_two.id_image = this.$refs.memberTwoIdImage.files[0].name
       } else {
         this.teamStore.member_two.id_image = ""
@@ -248,6 +285,10 @@ export default {
     },
     setMemberThreeIdImage(){
       if(this.$refs.memberThreeIdImage.files.length > 0) {
+        this.teamStore.member_three.name = this.$refs.memberThreeName.value
+        this.teamStore.member_three.phone = this.$refs.memberThreePhone.value
+        this.teamStore.member_three.email = this.$refs.memberThreeEmail.value
+        this.teamStore.member_three.institution = this.$refs.memberThreeInstitution.value
         this.teamStore.member_three.id_image = this.$refs.memberThreeIdImage.files[0].name
       } else {
         this.teamStore.member_three.id_image = ""
@@ -281,7 +322,7 @@ export default {
           }).then((result) => {
             this.loading = false
             if (result.isConfirmed && this.teamStore.isComplete) {
-              window.location.href="#ide"
+              window.location.href="#pembayaran"
             }
           });
         }else{

@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     back(){
-        window.location.href='#biodata'
+        window.location.href='#pembayaran'
     },
     simpan(){
       let formData = {
@@ -70,12 +70,9 @@ export default {
             icon: "success",
             title: "Berhasil",
             text: 'Berhasil menyimpan ide',
-            confirmButtonText: 'Lanjut Pembayaran',
+            confirmButtonText: 'OK',
           }).then((result) => {
             this.loading = false
-            if (result.isConfirmed) {
-              window.location.href="#pembayaran"
-            }
           });
         }else{
           this.loading = false

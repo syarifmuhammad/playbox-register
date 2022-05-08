@@ -11,15 +11,15 @@
                 <div class="row">
                     <a href="#biodata" class="mb-2 col-xs-12 col-sm-12 col-md-4 d-flex flex-column" style="cursor:pointer;">
                         <span class="mb-2 text-primary">1. Biodata</span>
-                        <span class="w-100" :style="currentView=='biodata' || currentView=='ide' || currentView=='pembayaran' ? 'border-bottom: 6px solid #1F89C5;' : 'border-bottom: 6px solid black'"></span>
+                        <span class="w-100" :style="currentView=='biodata' || currentView=='pembayaran' || currentView=='ide' ? 'border-bottom: 6px solid #1F89C5;' : 'border-bottom: 6px solid black'"></span>
                     </a>
-                    <a a href="#ide" class="mb-2 col-xs-12 col-sm-12 col-md-4 d-flex flex-column" style="cursor:pointer;">
-                        <span class="mb-2 text-primary">2. IDE</span>
-                        <span class="w-100" :style="currentView=='ide' || currentView=='pembayaran' ? 'border-bottom: 6px solid #1F89C5;' : 'border-bottom: 6px solid black'"></span>
+                    <a href="#pembayaran" class="mb-2 col-xs-12 col-sm-12 col-md-4 d-flex flex-column" style="cursor:pointer;">
+                        <span class="mb-2 text-primary">2. Pembayaran</span>
+                        <span class="w-100" :style="currentView=='pembayaran' || currentView=='ide' ? 'border-bottom: 6px solid #1F89C5;' : 'border-bottom: 6px solid black'"></span>
                     </a>
-                    <a a href="#pembayaran" class="mb-2 col-xs-12 col-sm-12 col-md-4 d-flex flex-column" style="cursor:pointer;">
-                        <span class="mb-2 text-secondary">3. Pembayaran</span>
-                        <span class="w-100" :style="currentView=='pembayaran' ? 'border-bottom: 6px solid #1F89C5;' : 'border-bottom: 6px solid black'"></span>
+                    <a href="#ide" class="mb-2 col-xs-12 col-sm-12 col-md-4 d-flex flex-column" style="cursor:pointer;">
+                        <span class="mb-2 text-secondary">3. IDE</span>
+                        <span class="w-100" :style="currentView=='ide' ? 'border-bottom: 6px solid #1F89C5;' : 'border-bottom: 6px solid black'"></span>
                     </a>
                 </div>
                 <component :is="currentView"></component>

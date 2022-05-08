@@ -1,5 +1,5 @@
 <template>
-    <div class="card mt-3">
+    <div class="card mt-3" v-if="!teamStore.loading">
         <div v-if="!teamStore.status">
             <div class="bg-primary rounded text-white p-5" style="min-height: 400px;">
                 <div class="row">
@@ -7,6 +7,14 @@
                         <h1 class="fw-bold mb-2">Akun anda belum diverifikasi oleh admin</h1>
                         <p class="col-sm-12 col-md-8">Lengkapi biodata dan ide agar dapat di verifikasi oleh admin serta lanjut ke tahap pembayaran uang pendaftaran.</p>
                     </div>
+                </div>
+            </div>
+            <div class="row m-0 my-4">
+                <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
+                    <button type="button" @click="back" class="w-100 btn btn-outline-primary fw-bold">KEMBALI</button>
+                </div>
+                <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
+                    <button disabled type="button" class="w-100 btn btn-primary fw-bold disabled">LANJUT</button>
                 </div>
             </div>
         </div>
@@ -25,7 +33,8 @@
                             <div class="payment-method mb-2 p-3 col-xs-12 col-sm-12 col-md-3 rounded border text-center d-flex align-items-center justify-content-center disabled" :class="payment_method == 'qris' ? 'bg-primary text-white' : 'border'">QRIS</div>
                         </div>
                         <h1 class="fs-3 my-4">{{teamStore.product.title}}</h1>
-                        <h1 class="fs-1 fw-bold my-4">{{toRupiah(teamStore.product.price)}}</h1>
+                        <h1 class="fs-1 fw-bold mt-4 mb-0">{{toRupiah(teamStore.product.price)}}</h1>
+                        <small>/ Include Fee Rp. 5.000</small>
                     </div>
                 </div>
                 <div class="row m-0 my-4">
@@ -44,7 +53,14 @@
                     <div class="row p-5">
                         <div class="col-sm-12">
                             <h1 class="text-center fw-bold">Anda telah melunasi biaya pendaftaran di kategori mahasiswa</h1>
-                            <button class="btn bg-white fw-bolder text-primary m-auto">Lanjut Pengisian Biodata</button>
+                        </div>
+                    </div>
+                    <div class="row m-0 my-4">
+                        <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
+                            <button type="button" @click="back" class="w-100 btn btn-outline-primary fw-bold">KEMBALI</button>
+                        </div>
+                        <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
+                            <button @click="next" type="button" class="w-100 btn btn-primary fw-bold">LANJUT</button>
                         </div>
                     </div>
                 </div>
@@ -70,6 +86,9 @@ export default {
             return "Rp. " + x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         },
         back(){
+            window.location.href='#biodata'
+        },
+        next(){
             window.location.href='#ide'
         },
         bayar(){
