@@ -48,27 +48,29 @@ export const useTeamStore = defineStore({
   }),
   actions: {
     getBiodata(){
-      http.get("team", {
-        headers: {
-          Authorization: "Bearer " + localStorage.PLAYBOX_TOKEN
-        }
-      }).then(response => {
-        this.member_one = response.data.data.member_one
-        this.member_two = response.data.data.member_two
-        this.member_three = response.data.data.member_three
-        if(response.data.data.category.trim() != ""){
-          this.selectedCategory = response.data.data.category
-        } else {
-          this.selectedCategory = "MHS"
-        }
-        this.status = response.data.data.status
-        this.payment = response.data.data.payment
-        this.idea = response.data.data.idea
-        this.product = response.data.product
-        this.loading = false
-      }).catch(e => {
-        this.loading = false
-      })
+      if(localStorage.getItem("PLAYBOX_TOKEN")){
+        http.get("team", {
+          headers: {
+            Authorization: "Bearer " + localStorage.PLAYBOX_TOKEN
+          }
+        }).then(response => {
+          this.member_one = response.data.data.member_one
+          this.member_two = response.data.data.member_two
+          this.member_three = response.data.data.member_three
+          if(response.data.data.category.trim() != ""){
+            this.selectedCategory = response.data.data.category
+          } else {
+            this.selectedCategory = "MHS"
+          }
+          this.status = response.data.data.status
+          this.payment = response.data.data.payment
+          this.idea = response.data.data.idea
+          this.product = response.data.product
+          this.loading = false
+        }).catch(e => {
+          this.loading = false
+        })
+      }
     }
   },
   getters: {
