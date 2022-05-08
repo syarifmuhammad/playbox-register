@@ -62,6 +62,7 @@ export default {
 </script>
 
 <style>
-/* @import "./assets/css/customize-bootstrap.css";
-@import "./assets/css/style.css"; */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '@/assets/css/customize-bootstrap.css';
+@import '@/assets/css/style.css';
 </style>
