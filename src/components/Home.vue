@@ -3,7 +3,7 @@
         <div class="col-lg-9 mx-auto">
             <header class="w-100 mt-4 d-flex flex-column">
                 <div class="text-center">
-                    <img src="assets/logo-playbox-s2-fix.png" style="max-height: 120px;" class="img-fluid" alt="">
+                    <img src="@/assets/images/logo-playbox-s3.png" style="max-height: 60px;" class="img-fluid mb-4" alt="">
                     <h1 class="fs-1 fw-bolder">Pendaftaran Playbox</h1>
                 </div>
             </header>

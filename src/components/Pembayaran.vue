@@ -27,7 +27,7 @@
                 </div>
                 <div class="row m-0 my-4">
                     <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
-                        <button @click="back" class="w-100 btn btn-outline-primary fw-bold">KEMBALI</button>
+                        <button @click="back" type="button" class="w-100 btn btn-outline-primary fw-bold">KEMBALI</button>
                     </div>
                     <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
                         <button type="submit" class="w-100 btn btn-primary fw-bold">BAYAR PENDAFTARAN</button>
@@ -67,7 +67,7 @@ export default {
             return "Rp. " + x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         },
         back(){
-            window.location.href='#biodata'
+            window.location.href='#ide'
         },
         bayar(){
             http.post("team/payment?paymentMethod=" + this.payment_method, {}, {
