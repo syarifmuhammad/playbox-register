@@ -47,12 +47,21 @@ export default {
   mounted() {
     window.addEventListener("hashchange", () => {
       this.currentPath = window.location.hash;
+      const teamStore = useTeamStore()
+      // if(!cekToken){
+      //   localStorage.removeItem("PLAYBOX_TOKEN")
+      //   useLoginStore.logout()
+      // }
+      if(!this.isLogin && (this.currentView != Login && this.currentView != Register)){
+        window.location.href="#login";
+      }
+      teamStore.getBiodata()
     });
   },
 };
 </script>
 
 <style>
-@import "./assets/css/customize-bootstrap.css";
-@import "./assets/css/style.css";
+/* @import "./assets/css/customize-bootstrap.css";
+@import "./assets/css/style.css"; */
 </style>

@@ -6,11 +6,11 @@
     >
       <div
         id="login"
-        class="col-xs-11 col-sm-10 col-md-6 col-xl-4 d-flex flex-column align-items-center justify-content-center py-3 px-4"
+        class="col-xs-11 col-sm-10 col-md-6 col-xl-4 d-flex flex-column align-items-center py-2 px-4"
       >
         <img
-          src="images/logo-playbox-s2-fix.png"
-          class="img-fluid w-50"
+          src="@/assets/images/logo-playbox-s3.png"
+          class="img-fluid w-50 my-4"
           alt=""
         />
         <form class="form d-flex flex-column w-100" @submit.prevent="login">
@@ -40,8 +40,9 @@
 </template>
 
 <script>
-import { mapState } from 'pinia'
+import { mapStores } from 'pinia'
 import {useLoginStore} from "../stores/login"
+import {useTeamStore} from "../stores/team"
 import http from "../http-common"
 export default {
   name: "Login",
@@ -52,7 +53,7 @@ export default {
     }
   },
   computed:{
-    ...mapState(useLoginStore, ['isLogin'])
+    ...mapStores(useLoginStore, ['isLogin'])
   },
   created(){
     if(this.isLogin) {
@@ -68,21 +69,26 @@ export default {
         let data = response.data
         if(!data.error){
           localStorage.setItem("PLAYBOX_TOKEN", data.data.token)
-          useLoginStore.login()
+          const loginStore = useLoginStore()
+          loginStore.login()
+          const teamStore = useTeamStore()
+          teamStore.getBiodata()
+
           window.location.href="#"
         }else{
           this.$swal.fire({
             icon: "error",
             title: "Gagal",
-            text: 'Kombinasi email dan password tidak valid !',
+            text: response.data.message,
           })
         }
       }).catch(e => {
+        console.log(e)
         if(e.response.data.error){
           this.$swal.fire({
             icon: "error",
             title: "Gagal",
-            text: 'Kombinasi email dan password tidak valid !',
+            text: e.response.data.message,
           })
         }
       })

@@ -1,6 +1,6 @@
 <template>
   <form class="card mt-3" @submit.prevent="simpan()" ref="form_biodata">
-    <div class="card-body">
+    <div class="card-body" v-if="!teamStore.loading">
       <h4 class="text-center fs-4 mb-3 fw-bold">KATEGORI</h4>
       <div class="d-flex justify-content-center row">
         <div
@@ -21,13 +21,14 @@
         </div>
         <div
           class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top"
-          @click="teamStore.selectedCategory = 'INTERNAL'"
-          :class="teamStore.selectedCategory == 'INTERNAL' ? 'text-white bg-primary' : 'border'"
+          @click="teamStore.selectedCategory = 'INT'"
+          :class="teamStore.selectedCategory == 'INT' ? 'text-white bg-primary' : 'border'"
           style="cursor: pointer; min-height: 80px"
         >
           Internal
         </div>
       </div>
+      <hr>
       <div class="row pb-3">
         <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
           <span class="text-primary fw-bold">HIPSTER</span>
@@ -73,10 +74,16 @@
                 <label for="kartu_identitas">{{ kartu_identitas }}</label>
                 <input
                   type="file"
-                  name="memberOneIdImage"
-                  class="form-control mb-3"
-                  :value="teamStore.member_one.id_image"
+                  ref="memberOneIdImage"
+                  class="form-control mb-3 d-none"
+                  @change="setMemberOneIdImage"
                 />
+                <div class="input-group mb-3" @click="$refs.memberOneIdImage.click()">
+                  <span class="input-group-text" id="basic-addon1">Choose File</span>
+                  <span class="form-control text-truncate" :class="teamStore.member_one.id_image.trim() != '' ? 'bg-success text-white' : ''" aria-describedby="basic-addon1">
+                    {{teamStore.member_one.id_image.trim() != "" ? teamStore.member_one.id_image : "No file chosen"}}
+                  </span>
+                </div>
               </div>
           </div>
         </div>
@@ -124,10 +131,16 @@
                 <label for="kartu_identitas">{{ kartu_identitas }}</label>
                 <input
                   type="file"
-                  name="memberTwoIdImage"
-                  class="form-control mb-3"
-                  :value="teamStore.member_two.id_image"
+                  ref="memberTwoIdImage"
+                  class="form-control mb-3 d-none"
+                  @change="setMemberTwoIdImage"
                 />
+                <div class="input-group mb-3" @click="$refs.memberTwoIdImage.click()">
+                  <span class="input-group-text" id="basic-addon1">Choose File</span>
+                  <span class="form-control text-truncate" :class="teamStore.member_two.id_image.trim() != '' ? 'bg-success text-white' : ''" aria-describedby="basic-addon1">
+                    {{teamStore.member_two.id_image.trim() != "" ? teamStore.member_two.id_image : "No file chosen"}}
+                  </span>
+                </div>
               </div>
               <!-- <input type="file" name="kartu_identitas" class="form-control"> -->
           </div>
@@ -176,16 +189,22 @@
                 <label for="kartu_identitas">{{ kartu_identitas }}</label>
                 <input
                   type="file"
-                  name="memberThreeIdImage"
-                  class="form-control mb-3"
-                  :value="teamStore.member_three.id_image"
+                  ref="memberThreeIdImage"
+                  class="form-control mb-3 d-none"
+                  @change="setMemberThreeIdImage"
                 />
+                <div class="input-group mb-3" @click="$refs.memberThreeIdImage.click()">
+                  <span class="input-group-text" id="basic-addon1">Choose File</span>
+                  <span class="form-control text-truncate" :class="teamStore.member_three.id_image.trim() != '' ? 'bg-success text-white' : ''" aria-describedby="basic-addon1">
+                    {{teamStore.member_three.id_image.trim() != "" ? teamStore.member_three.id_image : "No file chosen"}}
+                  </span>
+                </div>
               </div>
           </div>
         </div>
       </div>
       <div class="m-0 row my-3 justify-content-end">
-            <div class="col-6">
+            <div class="col-xs-12 col-sm-12 col-md-6">
                 <button type="submit" class="w-100 btn btn-primary fw-bold">
                   SIMPAN & LANJUT
                 </button>
@@ -202,22 +221,54 @@ export default {
   name: "Biodata",
   data() {
     return {
-
+      loading: false
     }
   },
   computed: {
     ...mapStores(useTeamStore),
     // ...mapWritableState(useTeamStore, ['teamStore.selectedCategory']),
     kartu_identitas() {
-      return this.teamStore.selectedCategory == "MHS" ? "KTM" : "KARTU PELAJAR";
+      return this.teamStore.selectedCategory == "MHS" || this.teamStore.selectedCategory == "INT"  ? "KTM" : "KARTU PELAJAR";
     }
   },
   methods: {
+    setMemberOneIdImage(){
+      if(this.$refs.memberOneIdImage.files.length > 0) {
+        this.teamStore.member_one.id_image = this.$refs.memberOneIdImage.files[0].name
+      } else {
+        this.teamStore.member_one.id_image = ""
+      }
+    },
+    setMemberTwoIdImage(){
+      if(this.$refs.memberTwoIdImage.files.length > 0) {
+        this.teamStore.member_two.id_image = this.$refs.memberTwoIdImage.files[0].name
+      } else {
+        this.teamStore.member_two.id_image = ""
+      }
+    },
+    setMemberThreeIdImage(){
+      if(this.$refs.memberThreeIdImage.files.length > 0) {
+        this.teamStore.member_three.id_image = this.$refs.memberThreeIdImage.files[0].name
+      } else {
+        this.teamStore.member_three.id_image = ""
+      }
+    },
     simpan() {
+      this.$swal.fire({
+        html: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>',
+        showConfirmButton: false
+      })
       let formData = new FormData(this.$refs.form_biodata)
       formData.append("category", this.teamStore.selectedCategory)
+      formData.append("memberOneRole", "Hipster")
+      formData.append("memberTwoRole", "Hacker")
+      formData.append("memberThreeRole", "Hustler")
+      formData.append("memberOneIdImage", this.$refs.memberOneIdImage.files[0])
+      formData.append("memberTwoIdImage", this.$refs.memberTwoIdImage.files[0])
+      formData.append("memberThreeIdImage", this.$refs.memberThreeIdImage.files[0])
       http.put('/team/biodata', formData, {
         headers: {
+          'Content-Type': 'multipart/form-data',
           Authorization: "Bearer " + localStorage.PLAYBOX_TOKEN
         }
       }).then(response => {
@@ -228,17 +279,26 @@ export default {
             text: 'Berhasil menyimpan biodata',
             confirmButtonText: 'Lanjut',
           }).then((result) => {
+            this.loading = false
             if (result.isConfirmed && this.teamStore.isComplete) {
-              window.location.href="#pembayaran"
+              window.location.href="#ide"
             }
           });
         }else{
+          this.loading = false
           this.$swal.fire({
             icon: "error",
             title: "Gagal",
-            text: 'Coba daftar kembali !',
+            text: 'Coba simpan kembali !',
           })
         }
+      }).catch(() => {
+        this.loading = false
+         this.$swal.fire({
+            icon: "error",
+            title: "Gagal",
+            text: 'Coba simpan kembali !',
+          })
       })
     }
   }

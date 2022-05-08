@@ -9,8 +9,8 @@
         class="col-xs-11 col-sm-10 col-md-6 col-xl-4 d-flex flex-column align-items-center justify-content-center py-3 px-4"
       >
         <img
-          src="images/logo-playbox-s2-fix.png"
-          class="img-fluid w-50"
+          src="@/assets/images/logo-playbox-s3.png"
+          class="img-fluid w-50 my-4"
           alt=""
         />
         <form class="form d-flex flex-column w-100" @submit.prevent="register">
@@ -91,6 +91,12 @@ export default {
             text: 'Coba daftar kembali !',
           })
         }
+      }).catch(e => {
+        this.$swal.fire({
+            icon: "error",
+            title: "Gagal",
+            text: e.response.data.message,
+          })
       })
     }
   }
