@@ -52,16 +52,16 @@
                 <div class="card-body bg-primary rounded text-white p-5" style="min-height: 400px;">
                     <div class="row p-5">
                         <div class="col-sm-12">
-                            <h1 class="text-center fw-bold">Anda telah melunasi biaya pendaftaran di kategori mahasiswa</h1>
+                            <h1 class="text-center fw-bold">Anda telah melunasi biaya pendaftaran di kategori {{teamStore.selectedCategory == 'SMA' ? 'SMA/SMK' : ''}} {{teamStore.selectedCategory == 'MHS' ? 'Mahasiswa' : ''}} {{teamStore.selectedCategory == 'INT' ? 'Internal' : ''}}</h1>
                         </div>
                     </div>
-                    <div class="row m-0 my-4">
-                        <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
-                            <button type="button" @click="back" class="w-100 btn btn-outline-primary fw-bold">KEMBALI</button>
-                        </div>
-                        <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
-                            <button @click="next" type="button" class="w-100 btn btn-primary fw-bold">LANJUT</button>
-                        </div>
+                </div>
+                <div class="row m-0 my-4">
+                    <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
+                        <button type="button" @click="back" class="w-100 btn btn-outline-primary fw-bold">KEMBALI</button>
+                    </div>
+                    <div class="mb-2 col-xs-12 col-sm-12 col-md-6">
+                        <button @click="next" type="button" class="w-100 btn btn-primary fw-bold">LANJUT</button>
                     </div>
                 </div>
             </div>

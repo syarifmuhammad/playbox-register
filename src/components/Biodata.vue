@@ -261,35 +261,67 @@ export default {
     }
   },
   methods: {
+    updateAnotherField(){
+      this.teamStore.member_one.name = this.$refs.memberOneName.value
+      this.teamStore.member_one.phone = this.$refs.memberOnePhone.value
+      this.teamStore.member_one.email = this.$refs.memberOneEmail.value
+      this.teamStore.member_one.institution = this.$refs.memberOneInstitution.value
+      this.teamStore.member_two.name = this.$refs.memberTwoName.value
+      this.teamStore.member_two.phone = this.$refs.memberTwoPhone.value
+      this.teamStore.member_two.email = this.$refs.memberTwoEmail.value
+      this.teamStore.member_two.institution = this.$refs.memberTwoInstitution.value
+      this.teamStore.member_three.name = this.$refs.memberThreeName.value
+      this.teamStore.member_three.phone = this.$refs.memberThreePhone.value
+      this.teamStore.member_three.email = this.$refs.memberThreeEmail.value
+      this.teamStore.member_three.institution = this.$refs.memberThreeInstitution.value
+    },
     setMemberOneIdImage(){
+      this.updateAnotherField()
       if(this.$refs.memberOneIdImage.files.length > 0) {
-        this.teamStore.member_one.name = this.$refs.memberOneName.value
-        this.teamStore.member_one.phone = this.$refs.memberOnePhone.value
-        this.teamStore.member_one.email = this.$refs.memberOneEmail.value
-        this.teamStore.member_one.institution = this.$refs.memberOneInstitution.value
-        this.teamStore.member_one.id_image = this.$refs.memberOneIdImage.files[0].name
+        let size = Math.round(this.$refs.memberOneIdImage.files[0].size/1024)
+        if(size > 2048) {
+          this.$swal.fire({
+            icon: "error",
+            title: "Upload file gagal",
+            text: 'File tidak boleh lebih dari 2 Mb',
+          })
+        } else {
+          this.teamStore.member_one.id_image = this.$refs.memberOneIdImage.files[0].name
+        }
       } else {
         this.teamStore.member_one.id_image = ""
       }
     },
     setMemberTwoIdImage(){
+      this.updateAnotherField()
       if(this.$refs.memberTwoIdImage.files.length > 0) {
-        this.teamStore.member_two.name = this.$refs.memberTwoName.value
-        this.teamStore.member_two.phone = this.$refs.memberTwoPhone.value
-        this.teamStore.member_two.email = this.$refs.memberTwoEmail.value
-        this.teamStore.member_two.institution = this.$refs.memberTwoInstitution.value
-        this.teamStore.member_two.id_image = this.$refs.memberTwoIdImage.files[0].name
+        let size = Math.round(this.$refs.memberOneIdImage.files[0].size/1024)
+        if(size > 2048) {
+          this.$swal.fire({
+            icon: "error",
+            title: "Upload file gagal",
+            text: 'File tidak boleh lebih dari 2 Mb',
+          })
+        } else {
+          this.teamStore.member_two.id_image = this.$refs.memberTwoIdImage.files[0].name
+        }
       } else {
         this.teamStore.member_two.id_image = ""
       }
     },
     setMemberThreeIdImage(){
+      this.updateAnotherField()
       if(this.$refs.memberThreeIdImage.files.length > 0) {
-        this.teamStore.member_three.name = this.$refs.memberThreeName.value
-        this.teamStore.member_three.phone = this.$refs.memberThreePhone.value
-        this.teamStore.member_three.email = this.$refs.memberThreeEmail.value
-        this.teamStore.member_three.institution = this.$refs.memberThreeInstitution.value
-        this.teamStore.member_three.id_image = this.$refs.memberThreeIdImage.files[0].name
+        let size = Math.round(this.$refs.memberOneIdImage.files[0].size/1024)
+        if(size > 2048) {
+          this.$swal.fire({
+            icon: "error",
+            title: "Upload file gagal",
+            text: 'File tidak boleh lebih dari 2 Mb',
+          })
+        } else {
+          this.teamStore.member_three.id_image = this.$refs.memberThreeIdImage.files[0].name
+        }
       } else {
         this.teamStore.member_three.id_image = ""
       }

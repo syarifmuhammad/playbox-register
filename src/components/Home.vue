@@ -23,6 +23,9 @@
                     </a>
                 </div>
                 <component :is="currentView"></component>
+                <div class="row justify-content-center my-3 mx-0">
+                    <button @click="logout" class="col-xs-12 col-sm-12 col-md-6 col-lg-4 btn btn-danger">LOGOUT</button>
+                </div>
             </main>
         </div>
     </div>
@@ -34,6 +37,7 @@
 import Biodata from './Biodata.vue'
 import Pembayaran from './Pembayaran.vue'
 import Ide from './Idea.vue'
+import {useLoginStore} from "../stores/login"
 
 export default {
     name:"Home",
@@ -56,6 +60,12 @@ export default {
         window.addEventListener('hashchange', () => {
             this.currentPath = window.location.hash
         })
+    },
+    methods: {
+        logout(){
+            const loginStore = useLoginStore()
+            loginStore.logout()
+        }
     }
 }
 </script>
