@@ -14,7 +14,10 @@ export const useLoginStore = defineStore({
       this.isLogin = true
     },
     logout() {
+      localStorage.removeItem('PLAYBOX_TOKEN')
+      this.token = ""
       this.isLogin = false
+      window.location.href = "#login"
     }
   },
 });
