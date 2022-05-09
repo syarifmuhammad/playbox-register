@@ -4,8 +4,15 @@
             <div class="bg-primary rounded text-white p-5" style="min-height: 400px;">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 class="fw-bold mb-2">Akun anda belum diverifikasi oleh admin</h1>
-                        <p class="col-sm-12 col-md-8">Lengkapi biodata dan ide agar dapat di verifikasi oleh admin serta lanjut ke tahap pembayaran uang pendaftaran.</p>
+                        <h1 class="fw-bold mb-2">Akun anda belum diverifikasi oleh admin mohon ditunggu maks 1 x 24 jam</h1>
+                        <p class="col-sm-12 col-md-9" v-if="teamStore.selectedCategory == 'INT'">
+                            Lengkapi biodata agar dapat di verifikasi oleh admin 
+                            serta lanjut ke tahap pengumpulan ide tanpa harus membayar uang pendaftaran / <b>gratis</b> karena anda mahasiswa dari Institut Teknologi Telkom Surabaya.
+                        </p>
+                        <p class="col-sm-12 col-md-8" v-else>
+                            Lengkapi biodata agar dapat di verifikasi oleh admin 
+                            serta lanjut ke tahap pembayaran uang pendaftaran.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -22,15 +29,38 @@
             <form @submit.prevent="bayar" class="form">
                  <div class="row m-0">
                     <div class="col-sm-12">
-                        <h1 class="fw-normal fs-2 border-bottom border-3 border-white fw-bolder">Metode Pembayaran</h1>
-                        <div class="row justify-content-between m-0">
-                            <div class="payment-method mb-2 p-3 col-xs-12 col-sm-12 col-md-3 rounded text-center d-flex align-items-center justify-content-center" @click="payment_method='va'" :class="payment_method == 'va' ? 'bg-primary text-white' : 'border'">Virtual Account</div>
-                            <!-- <div class="payment-method mb-2 p-3 col-xs-12 col-sm-12 col-md-3 rounded border text-center d-flex align-items-center justify-content-center" @click="payment_method='banktransfer'" :class="payment_method == 'banktransfer' ? 'bg-primary text-white' : 'border'">Bank Transfer</div>
-                            <div class="payment-method mb-2 p-3 col-xs-12 col-sm-12 col-md-3 rounded border text-center d-flex align-items-center justify-content-center" @click="payment_method='cstore'" :class="payment_method == 'cstore' ? 'bg-primary text-white' : 'border'">Alfamart / Indomaret</div>
-                            <div class="payment-method mb-2 p-3 col-xs-12 col-sm-12 col-md-3 rounded border text-center d-flex align-items-center justify-content-center" @click="payment_method='qris'" :class="payment_method == 'qris' ? 'bg-primary text-white' : 'border'">QRIS</div> -->
-                            <div class="payment-method mb-2 p-3 col-xs-12 col-sm-12 col-md-3 rounded border text-center d-flex align-items-center justify-content-center disabled" :class="payment_method == 'banktransfer' ? 'bg-primary text-white' : 'border'">Bank Transfer</div>
-                            <div class="payment-method mb-2 p-3 col-xs-12 col-sm-12 col-md-3 rounded border text-center d-flex align-items-center justify-content-center disabled" :class="payment_method == 'cstore' ? 'bg-primary text-white' : 'border'">Alfamart / Indomaret</div>
-                            <div class="payment-method mb-2 p-3 col-xs-12 col-sm-12 col-md-3 rounded border text-center d-flex align-items-center justify-content-center disabled" :class="payment_method == 'qris' ? 'bg-primary text-white' : 'border'">QRIS</div>
+                        <h1 class="fw-normal fs-2 border-bottom border-3 border-white fw-bolder text-center mb-2">Metode Pembayaran</h1>
+                        <div class="row justify-content-center m-0">
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/bca.png">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/bni.png">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/bri.png">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/niaga.png">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/mandiri.png">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/bsi.png">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/permata.png">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/qris_default.png">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/alfamart.png">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                                <img class="img-fluid" src="@/assets/images/indomaret.png">
+                            </div>
                         </div>
                         <h1 class="fs-3 my-4">{{teamStore.product.title}}</h1>
                         <h1 class="fs-1 fw-bold mt-4 mb-0">{{toRupiah(teamStore.product.price)}}</h1>
@@ -52,7 +82,8 @@
                 <div class="card-body bg-primary rounded text-white p-5" style="min-height: 400px;">
                     <div class="row p-5">
                         <div class="col-sm-12">
-                            <h1 class="text-center fw-bold">Anda telah melunasi biaya pendaftaran di kategori {{teamStore.selectedCategory == 'SMA' ? 'SMA/SMK' : ''}} {{teamStore.selectedCategory == 'MHS' ? 'Mahasiswa' : ''}} {{teamStore.selectedCategory == 'INT' ? 'Internal' : ''}}</h1>
+                            <h1 class="text-center fw-bold" v-if="teamStore.selectedCategory == 'INT'">Mahasiswa Institut Teknologi Telkom Surabaya tidak dikenakan biaya pendaftaran / gratis</h1>
+                            <h1 class="text-center fw-bold" v-else>Anda telah melunasi biaya pendaftaran di kategori {{teamStore.selectedCategory == 'SMA' ? 'SMA/SMK' : ''}} {{teamStore.selectedCategory == 'MHS' ? 'Mahasiswa' : ''}}</h1>
                         </div>
                     </div>
                 </div>
