@@ -295,7 +295,7 @@ export default {
     setMemberTwoIdImage(){
       this.updateAnotherField()
       if(this.$refs.memberTwoIdImage.files.length > 0) {
-        let size = Math.round(this.$refs.memberOneIdImage.files[0].size/1024)
+        let size = Math.round(this.$refs.memberTwoIdImage.files[0].size/1024)
         if(size > 2048) {
           this.$swal.fire({
             icon: "error",
@@ -312,7 +312,7 @@ export default {
     setMemberThreeIdImage(){
       this.updateAnotherField()
       if(this.$refs.memberThreeIdImage.files.length > 0) {
-        let size = Math.round(this.$refs.memberOneIdImage.files[0].size/1024)
+        let size = Math.round(this.$refs.memberThreeIdImage.files[0].size/1024)
         if(size > 2048) {
           this.$swal.fire({
             icon: "error",
