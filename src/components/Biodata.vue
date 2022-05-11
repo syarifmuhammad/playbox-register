@@ -41,6 +41,7 @@
                   ref="memberOneName"
                   name="memberOneName"
                   class="form-control mb-2"
+                  required
                   :value="teamStore.member_one.name"
                 />
               </div>
@@ -51,6 +52,7 @@
                   ref="memberOnePhone"
                   name="memberOnePhone"
                   class="form-control mb-2"
+                  required
                   :value="teamStore.member_one.phone"
                 />
               </div>
@@ -61,6 +63,7 @@
                   ref="memberOneEmail"
                   name="memberOneEmail"
                   class="form-control mb-2"
+                  required
                   :value="teamStore.member_one.email"
                 />
               </div>
@@ -71,6 +74,7 @@
                   ref="memberOneInstitution"
                   name="memberOneInstitution"
                   class="form-control mb-2"
+                  required
                   :readonly="teamStore.selectedCategory=='INT'"
                   :value="teamStore.selectedCategory=='INT' ? 'ITTelkom Surabaya' : teamStore.member_one.institution"
                 />
@@ -108,6 +112,7 @@
                   ref="memberTwoName"
                   name="memberTwoName"
                   class="form-control mb-2"
+                  required
                   :value="teamStore.member_two.name"
                 />
               </div>
@@ -118,6 +123,7 @@
                   ref="memberTwoPhone"
                   name="memberTwoPhone"
                   class="form-control mb-2"
+                  required
                   :value="teamStore.member_two.phone"
                 />
               </div>
@@ -128,6 +134,7 @@
                   ref="memberTwoEmail"
                   name="memberTwoEmail"
                   class="form-control mb-2"
+                  required
                   :value="teamStore.member_two.email"
                 />
               </div>
@@ -138,6 +145,7 @@
                   ref="memberTwoInstitution"
                   name="memberTwoInstitution"
                   class="form-control mb-2"
+                  required
                   :readonly="teamStore.selectedCategory=='INT'"
                   :value="teamStore.selectedCategory=='INT' ? 'ITTelkom Surabaya' : teamStore.member_two.institution"
                 />
@@ -176,6 +184,7 @@
                   ref="memberThreeName"
                   name="memberThreeName"
                   class="form-control mb-2"
+                  required
                   :value="teamStore.member_three.name"
                 />
               </div>
@@ -186,6 +195,7 @@
                   ref="memberThreePhone"
                   name="memberThreePhone"
                   class="form-control mb-2"
+                  required
                   :value="teamStore.member_three.phone"
                 />
               </div>
@@ -196,6 +206,7 @@
                   ref="memberThreeEmail"
                   name="memberThreeEmail"
                   class="form-control mb-2"
+                  required
                   :value="teamStore.member_three.email"
                 />
               </div>
@@ -206,6 +217,7 @@
                   ref="memberThreeInstitution"
                   name="memberThreeInstitution"
                   class="form-control mb-2"
+                  required
                   :readonly="teamStore.selectedCategory=='INT'"
                   :value="teamStore.selectedCategory=='INT' ? 'ITTelkom Surabaya' : teamStore.member_three.institution"
                 />
@@ -327,52 +339,64 @@ export default {
       }
     },
     simpan() {
-      this.$swal.fire({
-        html: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>',
-        showConfirmButton: false
-      })
-      let formData = new FormData(this.$refs.form_biodata)
-      formData.append("category", this.teamStore.selectedCategory)
-      formData.append("memberOneRole", "Hipster")
-      formData.append("memberTwoRole", "Hacker")
-      formData.append("memberThreeRole", "Hustler")
-      formData.append("memberOneIdImage", this.$refs.memberOneIdImage.files[0])
-      formData.append("memberTwoIdImage", this.$refs.memberTwoIdImage.files[0])
-      formData.append("memberThreeIdImage", this.$refs.memberThreeIdImage.files[0])
-      http.put('/team/biodata', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: "Bearer " + localStorage.PLAYBOX_TOKEN
-        }
-      }).then(response => {
-        if(!response.data.error){
-          this.$swal.fire({
-            icon: "success",
-            title: "Berhasil",
-            text: 'Berhasil menyimpan biodata',
-            confirmButtonText: 'Lanjut',
-          }).then((result) => {
+      let d = this.$refs
+      if(d.memberOneName.value.trim() == "" || d.memberOnePhone.value.trim() == "" || d.memberOneEmail.value.trim() == "" || d.memberOneInstitution.value.trim() == ""
+      || d.memberTwoName.value.trim() == "" || d.memberTwoPhone.value.trim() == "" || d.memberTwoEmail.value.trim() == "" || d.memberTwoInstitution.value.trim() == ""
+      || d.memberThreeName.value.trim() == "" || d.memberThreePhone.value.trim() == "" || d.memberThreeEmail.value.trim() == "" || d.memberThreeInstitution.value.trim() == ""
+      || d.memberOneIdImage.files.length < 1 || d.memberTwoIdImage.files.length < 1 || d.memberThreeIdImage.files.length < 1){
+        this.$swal.fire({
+          icon: "error",
+          title: "Ada form yang kosong",
+          text: 'Semua form wajib diisi !',
+        })
+      }else{
+        this.$swal.fire({
+          html: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>',
+          showConfirmButton: false
+        })
+        let formData = new FormData(this.$refs.form_biodata)
+        formData.append("category", this.teamStore.selectedCategory)
+        formData.append("memberOneRole", "Hipster")
+        formData.append("memberTwoRole", "Hacker")
+        formData.append("memberThreeRole", "Hustler")
+        formData.append("memberOneIdImage", this.$refs.memberOneIdImage.files[0])
+        formData.append("memberTwoIdImage", this.$refs.memberTwoIdImage.files[0])
+        formData.append("memberThreeIdImage", this.$refs.memberThreeIdImage.files[0])
+        http.put('/team/biodata', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: "Bearer " + localStorage.PLAYBOX_TOKEN
+          }
+        }).then(response => {
+          if(!response.data.error){
+            this.$swal.fire({
+              icon: "success",
+              title: "Berhasil",
+              text: 'Berhasil menyimpan biodata',
+              confirmButtonText: 'Lanjut',
+            }).then((result) => {
+              this.loading = false
+              if (result.isConfirmed && this.teamStore.isComplete) {
+                window.location.href="#pembayaran"
+              }
+            });
+          }else{
             this.loading = false
-            if (result.isConfirmed && this.teamStore.isComplete) {
-              window.location.href="#pembayaran"
-            }
-          });
-        }else{
+            this.$swal.fire({
+              icon: "error",
+              title: "Gagal",
+              text: 'Coba simpan kembali !',
+            })
+          }
+        }).catch(() => {
           this.loading = false
           this.$swal.fire({
-            icon: "error",
-            title: "Gagal",
-            text: 'Coba simpan kembali !',
-          })
-        }
-      }).catch(() => {
-        this.loading = false
-         this.$swal.fire({
-            icon: "error",
-            title: "Gagal",
-            text: 'Coba simpan kembali !',
-          })
-      })
+              icon: "error",
+              title: "Gagal",
+              text: 'Coba simpan kembali !',
+            })
+        })
+      }
     }
   }
 };

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import http from "../http-common"
+import {useLoginStore} from "../stores/login"
 
 export const useTeamStore = defineStore({
   id: "team",
@@ -69,6 +70,10 @@ export const useTeamStore = defineStore({
           this.loading = false
         }).catch(e => {
           this.loading = false
+          if(e.response.data.status == 4000) {
+            const loginStore = useLoginStore()
+            loginStore.logout()
+          }
         })
       }
     }
