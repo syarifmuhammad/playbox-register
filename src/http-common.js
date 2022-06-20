@@ -1,6 +1,6 @@
 import axios from "axios";
 export default axios.create({
-  baseURL: "https://playbox.erpn.us/api/",
+  baseURL: import.meta.env.VITE_BASE_URL_API,
   headers: {
     "Content-type": "application/json"
   }

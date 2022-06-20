@@ -2,7 +2,7 @@
   <form class="card mt-3" @submit.prevent="simpan()" ref="form_biodata">
     <div class="card-body" v-if="!teamStore.loading">
       <h4 class="text-center fs-4 mb-3 fw-bold">KATEGORI</h4>
-      <div class="d-flex justify-content-center row">
+      <div class="d-flex justify-content-center row" v-if="!teamStore.status">
         <div
           class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top text-center"
           @click="teamStore.selectedCategory = 'SMA'"
@@ -28,6 +28,29 @@
           ITTelkom Surabaya
         </div>
       </div>
+      <div class="d-flex justify-content-center row" v-else>
+        <div
+          class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top text-center"
+          :class="teamStore.selectedCategory == 'SMA' ? 'text-white bg-primary' : 'border'"
+          style="cursor: pointer; min-height: 80px"
+        >
+          SMA/SMK
+        </div>
+        <div
+          class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top text-center"
+          :class="teamStore.selectedCategory == 'MHS' ? 'text-white bg-primary' : 'border'"
+          style="cursor: pointer; min-height: 80px"
+        >
+          Mahasiswa
+        </div>
+        <div
+          class="col-sm-3 mt-2 d-flex justify-content-center align-items-center mx-2 fs-4 rounded-top text-center"
+          :class="teamStore.selectedCategory == 'INT' ? 'text-white bg-primary' : 'border'"
+          style="cursor: pointer; min-height: 80px"
+        >
+          ITTelkom Surabaya
+        </div>
+      </div>
       <hr>
       <div class="row pb-3">
         <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
@@ -43,6 +66,7 @@
                   class="form-control mb-2"
                   required
                   :value="teamStore.member_one.name"
+                  :disabled="teamStore.status"
                 />
               </div>
               <div class="form-group">
@@ -54,6 +78,7 @@
                   class="form-control mb-2"
                   required
                   :value="teamStore.member_one.phone"
+                  :disabled="teamStore.status"
                 />
               </div>
               <div class="form-group">
@@ -65,6 +90,7 @@
                   class="form-control mb-2"
                   required
                   :value="teamStore.member_one.email"
+                  :disabled="teamStore.status"
                 />
               </div>
               <div class="form-group">
@@ -77,9 +103,10 @@
                   required
                   :readonly="teamStore.selectedCategory=='INT'"
                   :value="teamStore.selectedCategory=='INT' ? 'ITTelkom Surabaya' : teamStore.member_one.institution"
+                  :disabled="teamStore.status"
                 />
               </div>
-              <div class="form-group">
+              <div v-if="!teamStore.status" class="form-group">
                 <label for="kartu_identitas">{{ kartu_identitas }}</label>
                 <input
                   type="file"
@@ -99,6 +126,9 @@
                   </div>
                 </div>
               </div>
+              <div v-else>
+                <img src="teamStore.member_one.id_image" class="w-100" alt="Foto Kartu Identitas">
+              </div>
           </div>
         </div>
         <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
@@ -114,6 +144,7 @@
                   class="form-control mb-2"
                   required
                   :value="teamStore.member_two.name"
+                  :disabled="teamStore.status"
                 />
               </div>
               <div class="form-group">
@@ -125,6 +156,7 @@
                   class="form-control mb-2"
                   required
                   :value="teamStore.member_two.phone"
+                  :disabled="teamStore.status"
                 />
               </div>
               <div class="form-group">
@@ -136,6 +168,7 @@
                   class="form-control mb-2"
                   required
                   :value="teamStore.member_two.email"
+                  :disabled="teamStore.status"
                 />
               </div>
               <div class="form-group">
@@ -148,9 +181,10 @@
                   required
                   :readonly="teamStore.selectedCategory=='INT'"
                   :value="teamStore.selectedCategory=='INT' ? 'ITTelkom Surabaya' : teamStore.member_two.institution"
+                  :disabled="teamStore.status"
                 />
               </div>
-              <div class="form-group">
+              <div v-if="!teamStore.status" class="form-group">
                 <label for="kartu_identitas">{{ kartu_identitas }}</label>
                 <input
                   type="file"
@@ -170,6 +204,9 @@
                   </div> 
                 </div>
               </div>
+              <div v-else class="form-group">
+                <img src="teamStore.member_two.id_image" class="w-100" alt="Foto Kartu Identitas">
+              </div>
               <!-- <input type="file" name="kartu_identitas" class="form-control"> -->
           </div>
         </div>
@@ -186,6 +223,7 @@
                   class="form-control mb-2"
                   required
                   :value="teamStore.member_three.name"
+                  :disabled="teamStore.status"
                 />
               </div>
               <div class="form-group">
@@ -197,6 +235,7 @@
                   class="form-control mb-2"
                   required
                   :value="teamStore.member_three.phone"
+                  :disabled="teamStore.status"
                 />
               </div>
               <div class="form-group">
@@ -208,6 +247,7 @@
                   class="form-control mb-2"
                   required
                   :value="teamStore.member_three.email"
+                  :disabled="teamStore.status"
                 />
               </div>
               <div class="form-group">
@@ -220,9 +260,10 @@
                   required
                   :readonly="teamStore.selectedCategory=='INT'"
                   :value="teamStore.selectedCategory=='INT' ? 'ITTelkom Surabaya' : teamStore.member_three.institution"
+                  :disabled="teamStore.status"
                 />
               </div>
-              <div class="form-group">
+              <div v-if="!teamStore.status" class="form-group">
                 <label for="kartu_identitas">{{ kartu_identitas }}</label>
                 <input
                   type="file"
@@ -242,17 +283,21 @@
                   </div>
                 </div>
               </div>
+              <div v-else class="form-group">
+                <img src="teamStore.member_three.id_image" class="w-100" alt="Foto Kartu Identitas">
+              </div>
           </div>
         </div>
       </div>
       <div class="m-0 row my-3 justify-content-end">
             <div class="col-xs-12 col-sm-12 col-md-6">
-                <button type="submit" class="w-100 btn btn-primary fw-bold">
+                <button :disabled="teamStore.status" type="submit" class="w-100 btn btn-primary fw-bold">
                   SIMPAN & LANJUT
                 </button>
             </div>
         </div>
     </div>
+    <div v-else>Loading...</div>
   </form>
 </template>
 <script>
@@ -339,63 +384,65 @@ export default {
       }
     },
     simpan() {
-      let d = this.$refs
-      if(d.memberOneName.value.trim() == "" || d.memberOnePhone.value.trim() == "" || d.memberOneEmail.value.trim() == "" || d.memberOneInstitution.value.trim() == ""
-      || d.memberTwoName.value.trim() == "" || d.memberTwoPhone.value.trim() == "" || d.memberTwoEmail.value.trim() == "" || d.memberTwoInstitution.value.trim() == ""
-      || d.memberThreeName.value.trim() == "" || d.memberThreePhone.value.trim() == "" || d.memberThreeEmail.value.trim() == "" || d.memberThreeInstitution.value.trim() == ""
-      || d.memberOneIdImage.files.length < 1 || d.memberTwoIdImage.files.length < 1 || d.memberThreeIdImage.files.length < 1){
-        this.$swal.fire({
-          icon: "error",
-          title: "Ada form yang kosong",
-          text: 'Semua form wajib diisi !',
-        })
-      }else{
-        this.$swal.fire({
-          html: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>',
-          showConfirmButton: false
-        })
-        let formData = new FormData(this.$refs.form_biodata)
-        formData.append("category", this.teamStore.selectedCategory)
-        formData.append("memberOneRole", "Hipster")
-        formData.append("memberTwoRole", "Hacker")
-        formData.append("memberThreeRole", "Hustler")
-        formData.append("memberOneIdImage", this.$refs.memberOneIdImage.files[0])
-        formData.append("memberTwoIdImage", this.$refs.memberTwoIdImage.files[0])
-        formData.append("memberThreeIdImage", this.$refs.memberThreeIdImage.files[0])
-        http.put('/team/biodata', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: "Bearer " + localStorage.PLAYBOX_TOKEN
-          }
-        }).then(response => {
-          if(!response.data.error){
-            this.$swal.fire({
-              icon: "success",
-              title: "Berhasil",
-              text: 'Berhasil menyimpan biodata',
-              confirmButtonText: 'Lanjut',
-            }).then((result) => {
+      if(!teamStore.status){
+        let d = this.$refs
+        if(d.memberOneName.value.trim() == "" || d.memberOnePhone.value.trim() == "" || d.memberOneEmail.value.trim() == "" || d.memberOneInstitution.value.trim() == ""
+        || d.memberTwoName.value.trim() == "" || d.memberTwoPhone.value.trim() == "" || d.memberTwoEmail.value.trim() == "" || d.memberTwoInstitution.value.trim() == ""
+        || d.memberThreeName.value.trim() == "" || d.memberThreePhone.value.trim() == "" || d.memberThreeEmail.value.trim() == "" || d.memberThreeInstitution.value.trim() == ""
+        || d.memberOneIdImage.files.length < 1 || d.memberTwoIdImage.files.length < 1 || d.memberThreeIdImage.files.length < 1){
+          this.$swal.fire({
+            icon: "error",
+            title: "Ada form yang kosong",
+            text: 'Semua form wajib diisi !',
+          })
+        }else{
+          this.$swal.fire({
+            html: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>',
+            showConfirmButton: false
+          })
+          let formData = new FormData(this.$refs.form_biodata)
+          formData.append("category", this.teamStore.selectedCategory)
+          formData.append("memberOneRole", "Hipster")
+          formData.append("memberTwoRole", "Hacker")
+          formData.append("memberThreeRole", "Hustler")
+          formData.append("memberOneIdImage", this.$refs.memberOneIdImage.files[0])
+          formData.append("memberTwoIdImage", this.$refs.memberTwoIdImage.files[0])
+          formData.append("memberThreeIdImage", this.$refs.memberThreeIdImage.files[0])
+          http.put('/team/biodata', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: "Bearer " + localStorage.PLAYBOX_TOKEN
+            }
+          }).then(response => {
+            if(!response.data.error){
+              this.$swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: 'Berhasil menyimpan biodata',
+                confirmButtonText: 'Lanjut',
+              }).then((result) => {
+                this.loading = false
+                if (result.isConfirmed && this.teamStore.isComplete) {
+                  window.location.href="#pembayaran"
+                }
+              });
+            }else{
               this.loading = false
-              if (result.isConfirmed && this.teamStore.isComplete) {
-                window.location.href="#pembayaran"
-              }
-            });
-          }else{
+              this.$swal.fire({
+                icon: "error",
+                title: "Gagal",
+                text: 'Coba simpan kembali !',
+              })
+            }
+          }).catch(() => {
             this.loading = false
             this.$swal.fire({
-              icon: "error",
-              title: "Gagal",
-              text: 'Coba simpan kembali !',
-            })
-          }
-        }).catch(() => {
-          this.loading = false
-          this.$swal.fire({
-              icon: "error",
-              title: "Gagal",
-              text: 'Coba simpan kembali !',
-            })
-        })
+                icon: "error",
+                title: "Gagal",
+                text: 'Coba simpan kembali !',
+              })
+          })
+        }
       }
     }
   }
