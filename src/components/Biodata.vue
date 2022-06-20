@@ -127,7 +127,7 @@
                 </div>
               </div>
               <div v-else>
-                <img src="teamStore.member_one.id_image" class="w-100" alt="Foto Kartu Identitas">
+                <img :src="teamStore.member_one.id_image" class="w-100" alt="Foto Kartu Identitas">
               </div>
           </div>
         </div>
@@ -205,7 +205,7 @@
                 </div>
               </div>
               <div v-else class="form-group">
-                <img src="teamStore.member_two.id_image" class="w-100" alt="Foto Kartu Identitas">
+                <img :src="teamStore.member_two.id_image" class="w-100" alt="Foto Kartu Identitas">
               </div>
               <!-- <input type="file" name="kartu_identitas" class="form-control"> -->
           </div>
@@ -284,7 +284,7 @@
                 </div>
               </div>
               <div v-else class="form-group">
-                <img src="teamStore.member_three.id_image" class="w-100" alt="Foto Kartu Identitas">
+                <img :src="teamStore.member_three.id_image" class="w-100" alt="Foto Kartu Identitas">
               </div>
           </div>
         </div>
