@@ -384,7 +384,7 @@ export default {
       }
     },
     simpan() {
-      if(!teamStore.status){
+      if(!this.teamStore.status){
         let d = this.$refs
         if(d.memberOneName.value.trim() == "" || d.memberOnePhone.value.trim() == "" || d.memberOneEmail.value.trim() == "" || d.memberOneInstitution.value.trim() == ""
         || d.memberTwoName.value.trim() == "" || d.memberTwoPhone.value.trim() == "" || d.memberTwoEmail.value.trim() == "" || d.memberTwoInstitution.value.trim() == ""
